@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, {useContext} from 'react';
 import './App.css';
+import Navbar from './components/Navbar/Navbar';
+import { ContextAuth } from './context/Authentication';
+import LogV from './page/Loginv';
+import Main from './page/Main';
 
 function App() {
+  const authContext = useContext(ContextAuth);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {!authContext.isLogin ? (
+        <LogV/>
+      ) : (
+        <>
+          <header className="App-header">
+            <Navbar/>
+          </header>
+          <main>
+            <Main/>
+          </main>
+        </>
+      )}
     </div>
   );
 }
